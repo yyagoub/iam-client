@@ -1,6 +1,5 @@
 package sa.elm.iam.client.config;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,26 +17,14 @@ public class PropertyConfig {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "jks.store.client")
-    public JksProperty clientJksProperty(){
+    @ConfigurationProperties(prefix = "jks.store")
+    public JksProperty jksProperty(){
         return new JksProperty();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "jks.store.idp")
-    public JksProperty idpJksProperty(){
-        return new JksProperty();
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "jks.store.authorization")
-    public JksProperty authorizationJksProperty(){
-        return new JksProperty();
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "certificate.client")
-    public CertificateProperty clientCertificateProperty(){
+    @ConfigurationProperties(prefix = "certificate.client.private")
+    public CertificateProperty clientPrivateCertificateProperty(){
         return new CertificateProperty();
     }
 

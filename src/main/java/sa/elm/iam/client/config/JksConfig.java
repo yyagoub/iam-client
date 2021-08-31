@@ -16,7 +16,7 @@ public class JksConfig {
     }
 
     @Bean
-    public KeyStore clientKeyStore(KeyStoreManager keyStoreManager, JksProperty clientJksProperty) throws Exception {
-        return keyStoreManager.getKeyStore(clientJksProperty);
+    public KeyStore keyStore(KeyStoreManager keyStoreManager, JksProperty jksProperty) throws Exception {
+        return keyStoreManager.getKeyStore(jksProperty);
     }
 }

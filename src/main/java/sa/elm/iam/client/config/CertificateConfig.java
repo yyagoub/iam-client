@@ -12,7 +12,7 @@ import java.security.KeyStore;
 public class CertificateConfig {
 
     @Bean
-    public Certificate clientCertificate(KeyStore clientKeyStore, CertificateProperty clientCertificateProperty){
-        return new PrivateCertificate(clientKeyStore, clientCertificateProperty);
+    public Certificate clientCertificate(KeyStore keyStore, CertificateProperty clientPrivateCertificateProperty){
+        return new PrivateCertificate(keyStore, clientPrivateCertificateProperty);
     }
 }
