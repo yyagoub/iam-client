@@ -2,9 +2,12 @@ package sa.elm.iam.client.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import sa.elm.iam.client.model.ValidateLoginRequest;
 import sa.elm.iam.client.service.UrlService;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
@@ -36,14 +39,14 @@ public class UrlController {
     /**
      *
      * @Author Yousef Yagoub
-     * @param url
+     * @param validateLoginRequest
      * @return String
      *
      * used to validate iam login link
      */
     @PostMapping
-    public String validateLoginUrl(@RequestBody String url) {
-        return urlService.validateUrl(url);
+    public String validateLoginUrl(@RequestBody ValidateLoginRequest validateLoginRequest) throws IOException {
+        return urlService.validateUrl(validateLoginRequest.getUrl());
     }
 
 }

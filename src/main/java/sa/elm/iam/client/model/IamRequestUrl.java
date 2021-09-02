@@ -39,36 +39,6 @@ public class IamRequestUrl implements Cloneable{
     private String maxAge;
     private String state;
 
-    public String toBeSignedUrl(){
-        return host+"?"
-                + "scope" + "=" + scope
-                + "&" + "response_type" + "=" + responseType
-                + "&" + "response_mode" + "=" + responseMode
-                + "&" + "client_id" + "=" + clientId
-                + "&" + "redirect_uri" + "=" + redirectUri
-                + "&" + "nonce" + "=" + nonce
-                + "&" + "ui_locales" + "=" + uiLocales
-                + "&" + "prompt" + "=" + prompt
-                + "&" + "max_age" + "=" + maxAge
-                //+ "&" + "state" + "=" + state
-                ;
-    }
-
-    public String signedUrl(){
-        return host+"?"
-                + "scope" + "=" + scope
-                + "&" + "response_type" + "=" + responseType
-                + "&" + "response_mode" + "=" + responseMode
-                + "&" + "client_id" + "=" + clientId
-                + "&" + "redirect_uri" + "=" + redirectUri
-                + "&" + "nonce" + "=" + nonce
-                + "&" + "ui_locales" + "=" + uiLocales
-                + "&" + "prompt" + "=" + prompt
-                + "&" + "max_age" + "=" + maxAge
-                + "&" + "state" + "=" + state
-                ;
-    }
-
     public IamRequestUrl clone() throws CloneNotSupportedException {
         return (IamRequestUrl) super.clone();
     }

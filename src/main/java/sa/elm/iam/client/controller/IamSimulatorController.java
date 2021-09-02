@@ -14,6 +14,14 @@ public class IamSimulatorController {
 
     private final IamSimulatorService iamSimulatorService;
 
+    /**
+     * @Author Yousef Yagoub
+     * @param authorizationRequest
+     * @return
+     *
+     * used to simulate IAM authorization request endpoint
+     * * NOTE: IAM return redirect url, hence the simulator return dummy url
+     */
     @GetMapping
     public String simulateAuthorizationEndpoint(AuthorizationRequest authorizationRequest){
         return this.iamSimulatorService.checkRequest(authorizationRequest);

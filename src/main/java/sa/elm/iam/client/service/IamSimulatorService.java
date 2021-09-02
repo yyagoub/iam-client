@@ -14,18 +14,21 @@ public class IamSimulatorService {
     private final IamRequestUrl url;
 
     public String checkRequest(AuthorizationRequest authorizationRequest) {
-        this.checkConstantQueryParam(authorizationRequest);
+        this.validateRequestQueryParam(authorizationRequest);
         return "this is request have been validated and it seems fine";
     }
 
-    private void checkConstantQueryParam(AuthorizationRequest request){
+    private void validateRequestQueryParam(AuthorizationRequest request){
         this.compareRequestValue(request.getScope(), url.getScope(), "scope");
         this.compareRequestValue(request.getResponse_type(), url.getResponseType(), "response_type");
         this.compareRequestValue(request.getResponse_mode(), url.getResponseMode(), "response_mode");
         this.compareRequestValue(request.getClient_id(), url.getClientId(), "client_id");
         this.compareRequestValue(request.getRedirect_uri(), url.getRedirectUri(), "redirect_uri");
+        // TODO: this.checkNonce();
         this.compareRequestValue(request.getUi_locales(), url.getUiLocales(), "ui_locales");
         this.compareRequestValue(request.getPrompt(), url.getPrompt(), "prompt");
+        // TODO: this.checkTimestamp();
+        // TODO: this.checkState();
     }
 
     private void compareRequestValue(String request, String url, String param){
