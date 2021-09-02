@@ -1,4 +1,4 @@
-package sa.elm.iam.client.security.certificate;
+package sa.elm.iam.client.config.security.certificate;
 
 import java.io.IOException;
 import java.security.Key;

@@ -28,4 +28,10 @@ public class PropertyConfig {
         return new CertificateProperty();
     }
 
+    @Bean
+    @ConfigurationProperties(prefix = "certificate.client.public")
+    public CertificateProperty clientPublicCertificateProperty(){
+        return new CertificateProperty();
+    }
+
 }

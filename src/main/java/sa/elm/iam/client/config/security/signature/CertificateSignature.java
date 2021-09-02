@@ -1,6 +1,7 @@
-package sa.elm.iam.client.security.signature;
+package sa.elm.iam.client.config.security.signature;
 
 import lombok.AllArgsConstructor;
+import sa.elm.iam.client.config.exception.InternalServerException;
 
 import java.io.UnsupportedEncodingException;
 import java.security.*;
@@ -21,6 +22,7 @@ public class CertificateSignature implements PublicCertificateSignature, Private
     }
 
     private Signature getSignature(String message) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, UnsupportedEncodingException {
+        if (this.key == null) throw new InternalServerException("Certificate was not initialized, hence we can not get signature");
         Signature signature = Signature.getInstance("SHA256withRSA");
         this.prepareSignature(signature, this.key);
         signature.update(message.getBytes("UTF8"));

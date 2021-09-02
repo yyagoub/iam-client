@@ -1,4 +1,4 @@
-package sa.elm.iam.client.security.signature;
+package sa.elm.iam.client.config.security.signature;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;

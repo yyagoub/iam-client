@@ -2,9 +2,10 @@ package sa.elm.iam.client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import sa.elm.iam.client.config.security.certificate.PublicCertificate;
 import sa.elm.iam.client.model.CertificateProperty;
-import sa.elm.iam.client.security.certificate.Certificate;
-import sa.elm.iam.client.security.certificate.PrivateCertificate;
+import sa.elm.iam.client.config.security.certificate.Certificate;
+import sa.elm.iam.client.config.security.certificate.PrivateCertificate;
 
 import java.security.KeyStore;
 
@@ -12,7 +13,12 @@ import java.security.KeyStore;
 public class CertificateConfig {
 
     @Bean
-    public Certificate clientCertificate(KeyStore keyStore, CertificateProperty clientPrivateCertificateProperty){
+    public Certificate clientPrivateCertificate(KeyStore keyStore, CertificateProperty clientPrivateCertificateProperty){
         return new PrivateCertificate(keyStore, clientPrivateCertificateProperty);
+    }
+
+    @Bean
+    public Certificate clientPublicCertificate(KeyStore keyStore, CertificateProperty clientPrivateCertificateProperty){
+        return new PublicCertificate(keyStore, clientPrivateCertificateProperty);
     }
 }
