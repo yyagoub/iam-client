@@ -1,6 +1,9 @@
 ### Table of content
 
-* [Introduction](../../#technologies)
+* [Introduction](../../#Introduction)
+* [Configure IAM-Client](../../#Configure IAM-Client)
+* [How to run IAM-Client service] (../../#How to run IAM-Client service)
+* [Functionalities] (../../#Functionalities)
 
 ## Introduction
 
