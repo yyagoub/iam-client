@@ -13,6 +13,7 @@ IAM-Client service is an IAM's client side application used to generate IAM logi
 
 ### Technologies 
 
+* Java 8
 * Spring boot
 * Spring web **REST**
 * Lombok
@@ -56,7 +57,8 @@ In the following section you will know how to generate IAM url and how to valida
 
 ## How to run IAM-Client service
 
-TO-DO
+* [Linux remote server](https://www.youtube.com/watch?v=W2Ccvpt4C3A&ab_channel=EduonixLearningSolutions)
+* TO-DO
 
 ## Functionalities
 
