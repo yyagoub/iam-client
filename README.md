@@ -1,9 +1,9 @@
 ### Table of content
 
 * [Introduction](../../#Introduction)
-* [Configure IAM-Client](../../#Configure IAM-Client)
-* [How to run IAM-Client service] (../../#How to run IAM-Client service)
-* [Functionalities] (../../#Functionalities)
+* [Configure IAM-Client](../../#configure-iam-client)
+* [How to run IAM-Client service](../../#how-to-run-iam-client-service)
+* [Functionalities](../../#Functionalities)
 
 ## Introduction
 
