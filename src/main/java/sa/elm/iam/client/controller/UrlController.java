@@ -7,7 +7,6 @@ import sa.elm.iam.client.service.UrlService;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
@@ -45,7 +44,7 @@ public class UrlController {
      * used to validate iam login link
      */
     @PostMapping
-    public String validateLoginUrl(@RequestBody ValidateLoginRequest validateLoginRequest) throws IOException {
+    public String validateLoginUrl(@RequestBody ValidateLoginRequest validateLoginRequest) throws IOException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         return urlService.validateUrl(validateLoginRequest.getUrl());
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sa.elm.iam.client.config.exception.UnprocessableEntityException;
 import sa.elm.iam.client.config.security.signature.PrivateCertificateSignature;
+import sa.elm.iam.client.config.security.signature.PublicCertificateSignature;
 import sa.elm.iam.client.model.IamRequestUrl;
 import sa.elm.iam.client.util.IamRequestUrlUtil;
 
@@ -11,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
@@ -22,6 +24,7 @@ public class UrlService {
 
     private final IamRequestUrlService iamRequestUrlService;
     private final PrivateCertificateSignature clientPrivateCertificateSignature;
+    private final PublicCertificateSignature clientPublicCertificateSignature;
     private final IamRequestUrlUtil util;
 
     public String createIamRequestUrl() throws CloneNotSupportedException, NoSuchAlgorithmException, SignatureException, InvalidKeyException, UnsupportedEncodingException {
@@ -31,10 +34,12 @@ public class UrlService {
         return iamRequestUrlService.signedUrl(url);
     }
 
-    public String validateUrl(String requestUrl) {
+    public String validateUrl(String requestUrl) throws UnsupportedEncodingException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         URL url = this.prepareUrl(requestUrl);
         this.iamRequestUrlService.validateUrlsHost(url);
         this.iamRequestUrlService.validateUrlsQuery(url);
+        String state = this.iamRequestUrlService.getStateFromUrl(url);
+        this.clientPublicCertificateSignature.verify(url.toString(), state.getBytes(StandardCharsets.UTF_8));
         return "this is url have been validated and it seems fine";
     }
 

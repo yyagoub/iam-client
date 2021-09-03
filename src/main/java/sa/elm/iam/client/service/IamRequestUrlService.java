@@ -63,6 +63,15 @@ public class IamRequestUrlService {
             throw new UnprocessableEntityException("invalid host: " + host + "\nplease replace it with: "+iamRequestUrl.getHost());
     }
 
+    public String getStateFromUrl(URL url){
+        try {
+            String queryParamAndValue = url.getQuery().split("&")[9];
+            return queryParamAndValue.split("=")[0];
+        } catch (Exception e){
+            throw new UnprocessableEntityException("state query are missing");
+        }
+    }
+
     private String buildHost(URL url){
         return url.getProtocol() +"://" + url.getHost() + "/authservice/authorize";
     }
@@ -83,7 +92,7 @@ public class IamRequestUrlService {
         if (keyValue.length>2 && keyValue[0].equals("redirect_uri"))
             throw new UnprocessableEntityException("the query param redirect_uri value must be URL encoded");
         if (keyValue.length>2)
-            throw new UnprocessableEntityException("the query param ["+keyValue[0]+"] contains invalid URL query value. Check for query value contains =");
+            throw new UnprocessableEntityException("the query param ["+keyValue[0]+"] contains invalid query value. Check for query value contains =");
         if (keyValue.length<2)
             throw new UnprocessableEntityException("the query param ["+keyValue[0]+"] are missing the value");
     }
