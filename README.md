@@ -1,6 +1,6 @@
 ### Table of content
 
-* [Introduction](/README.md#iam-client#technologies)
+* [Introduction](../../#technologies)
 
 ## Introduction
 
