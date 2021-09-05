@@ -34,27 +34,32 @@ public class UrlService {
         return iamRequestUrlService.signedUrl(url);
     }
 
-    public String validateUrl(String requestUrl) throws UnsupportedEncodingException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    public String validateUrl(final String requestUrl) throws UnsupportedEncodingException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         URL url = this.prepareUrl(requestUrl);
         this.iamRequestUrlService.validateUrlsHost(url);
         this.iamRequestUrlService.validateUrlsQuery(url);
         String state = this.iamRequestUrlService.getStateFromUrl(url);
-        this.clientPublicCertificateSignature.verify(url.toString(), state.getBytes(StandardCharsets.UTF_8));
+        String urlWithoutState = getUrlWithoutState(url);
+        this.clientPublicCertificateSignature.verify(urlWithoutState, state.getBytes(StandardCharsets.UTF_8));
         return "this is url have been validated and it seems fine";
     }
 
-    private String encodeAndSignUrl(String url) throws UnsupportedEncodingException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    private String encodeAndSignUrl(final String url) throws UnsupportedEncodingException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         byte[] signedUrl = clientPrivateCertificateSignature.sign(url);
         String encodedSignedUrl = Base64.getEncoder().encodeToString(signedUrl);
         return URLEncoder.encode(encodedSignedUrl, "UTF-8");
     }
 
-    private URL prepareUrl(String requestUrl) {
+    private URL prepareUrl(final String requestUrl) {
         try {
             return new URL(requestUrl);
         } catch (MalformedURLException e) {
             throw new UnprocessableEntityException(e.getMessage());
         }
+    }
+
+    private String getUrlWithoutState(URL url){
+        return url.toString().split("&state=")[0];
     }
 
 }
