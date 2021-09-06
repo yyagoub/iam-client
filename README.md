@@ -34,6 +34,14 @@ host | `iam.request.url.host` | check if the client are using the staging or pro
 client-id | `iam.request.url.client-id` | it is the *reference number* giving to the client .
 redirect-uri | `iam.request.url.redirect-uri` | *redirect-uri is a static*, please use the submitted redirect-uri to the NIC, **without queries or extra path**.
 
+**NOTE:** *for Production please use the following host:*
+
+https://iam.elm.sa/authservice/authorize
+
+**NOTE:** *for Staging please use the following host:*
+
+https://iambeta.elm.sa/authservice/authorize
+
 another group will start with `jks.store` this group will help the client refereing to the key store
 
 property | key | value explain
@@ -42,14 +50,14 @@ path | `jks.store.path` | the full system path to the key store .
 pass | `jks.store.pass` | provide the password for the key store.
 store-type | `jks.store.store-type` | specify the key store type. (e.g. `JKS`)
 
-lastly the client is going to refere to the certificates, the last group of properties will start with `certificate.client`, which will help to fetch certificate from the configured key store.
+lastly the client is going to refer to the certificates, the last group of properties will start with `certificate.client`, which will help to fetch certificate from the configured key store.
 
 property | key | value explain
 --- | --- | ---
-private.alias | `certificate.client.private.alias` | refere to the private key alias that giving to the certificate once imported to the key store.
-private.password | `certificate.client.private.password` | refere to the private key's password of the certificate.
-public.alias | `certificate.client.public.alias` | refere to the public key alias that giving to the certificate once imported to the key store.
-public.password | `certificate.client.public.password` | refere to the private key's password of the certificate *if exists*.
+private.alias | `certificate.client.private.alias` | refer to the private key alias that giving to the certificate once imported to the key store.
+private.password | `certificate.client.private.password` | refer to the private key's password of the certificate.
+public.alias | `certificate.client.public.alias` | refer to the public key alias that giving to the certificate once imported to the key store.
+public.password | `certificate.client.public.password` | refer to the private key's password of the certificate *if exists*.
 
 #### Once you fill the previous key value pairs you are ready to run the application.
 
@@ -72,7 +80,7 @@ The client can directly generate login url by hitting the rest endpoint:
 
 and it will return back login url as string and you may use it to test.
 
-**NOTE:** *In order to access IAM servers the client server need to be white labled in the NIC.*
+**NOTE:** *In order to access IAM servers the client server need to be configured in the NIC.*
 
 ### validate iam url
 

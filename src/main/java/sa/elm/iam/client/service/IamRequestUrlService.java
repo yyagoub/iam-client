@@ -38,21 +38,11 @@ public class IamRequestUrlService {
                 + "&" + "ui_locales" + "=" + url.getUiLocales()
                 + "&" + "prompt" + "=" + url.getPrompt()
                 + "&" + "max_age" + "=" + url.getMaxAge()
-                //+ "&" + "state" + "=" + state
                 ;
     }
 
     public String signedUrl(IamRequestUrl url){
-        return url.getHost()+"?"
-                + "scope" + "=" + url.getScope()
-                + "&" + "response_type" + "=" + url.getResponseType()
-                + "&" + "response_mode" + "=" + url.getResponseMode()
-                + "&" + "client_id" + "=" + url.getClientId()
-                + "&" + "redirect_uri" + "=" + url.getRedirectUri()
-                + "&" + "nonce" + "=" + url.getNonce()
-                + "&" + "ui_locales" + "=" + url.getUiLocales()
-                + "&" + "prompt" + "=" + url.getPrompt()
-                + "&" + "max_age" + "=" + url.getMaxAge()
+        return this.toBeSignedUrl(url)
                 + "&" + "state" + "=" + url.getState()
                 ;
     }
@@ -98,44 +88,34 @@ public class IamRequestUrlService {
     }
 
     private void validateUrlsQueryOrder(String[] queryArray){
-        String[][] orderedQuery = this.getOrderedQueryParam();
+        String[] orderedQuery = this.getOrderedQueryParam();
         if (queryArray.length != orderedQuery.length)
             throw new UnprocessableEntityException("One of the query parameters are missing");
         for (int i = 0; i < orderedQuery.length; i++){
             String queryParam = queryArray[i].split("=")[0];
-            if (!orderedQuery[i][0].equals(queryParam))
-                throw new UnprocessableEntityException("Invalid query parameters order parameter["+i+"]: "+orderedQuery[i][0]+"!="+queryParam);
+            if (!orderedQuery[i].equals(queryParam))
+                throw new UnprocessableEntityException("Invalid query parameters order parameter["+i+"]: "+orderedQuery[i]+"!="+queryParam);
         }
     }
 
     private void validateUrlsQueryValues(Map<String,String> queryMap){
         // TODO
-        String[][] orderedQuery = this.getOrderedQueryParam();
+        String[] orderedQuery = this.getOrderedQueryParam();
     }
 
-    private String[][] getOrderedQueryParam() {
+    private String[] getOrderedQueryParam() {
         // TODO: move it to a bean
-        String[][] query = new String[10][2];
-        query[0][0] = "scope";
-        query[0][1] = "scope";
-        query[1][0] = "response_type";
-        query[1][1] = "response_type";
-        query[2][0] = "response_mode";
-        query[2][1] = "response_mode";
-        query[3][0] = "client_id";
-        query[3][1] = "client_id";
-        query[4][0] = "redirect_uri";
-        query[4][1] = "redirect_uri";
-        query[5][0] = "nonce";
-        query[5][1] = "nonce";
-        query[6][0] = "ui_locales";
-        query[6][1] = "ui_locales";
-        query[7][0] = "prompt";
-        query[7][1] = "prompt";
-        query[8][0] = "max_age";
-        query[8][1] = "max_age";
-        query[9][0] = "state";
-        query[9][1] = "state";
+        String[] query = new String[10];
+        query[0] = "scope";
+        query[1] = "response_type";
+        query[2] = "response_mode";
+        query[3] = "client_id";
+        query[4] = "redirect_uri";
+        query[5] = "nonce";
+        query[6] = "ui_locales";
+        query[7] = "prompt";
+        query[8] = "max_age";
+        query[9] = "state";
         return query;
     }
 
