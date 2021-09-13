@@ -26,6 +26,6 @@ public class IamRequestUrlUtil {
     }
 
     private long getCurrentTimestamp(){
-        return ZonedDateTime.now(zoneId).toInstant().toEpochMilli();
+        return ZonedDateTime.now(zoneId).toEpochSecond();
     }
 }
